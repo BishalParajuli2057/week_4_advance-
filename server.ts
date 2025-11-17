@@ -1,53 +1,77 @@
 import express from "express";
+import path from "path";
 
 const app = express();
 const PORT = 3000;
 
-// Middleware for parsing JSON in POST requests
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "../public")));
 
-// Root route for CodeGrade detection
+type TUser = {
+  name: string;
+  email: string;
+};
+
+let users: TUser[] = [];
+
+//1
 app.get("/", (req, res) => {
   res.json({ message: "Server is running" });
 });
 
-// Hello world route
 app.get("/hello", (req, res) => {
   res.json({
     msg: "Hello world!",
   });
 });
 
-// 2. ID echoing route
+//2
 app.get("/echo/:id", (req, res) => {
   res.json({
     id: req.params.id,
   });
 });
 
-// 3. POST sum route
+//3
 app.post("/sum", (req, res) => {
   const { numbers } = req.body;
 
-  // Validate that numbers is an array
   if (!Array.isArray(numbers)) {
     return res.status(400).json({
       error: "Request body must contain a 'numbers' array",
     });
   }
 
-  // Validate that all elements are numbers
   if (!numbers.every((num) => typeof num === "number")) {
     return res.status(400).json({
       error: "All elements in 'numbers' must be numbers",
     });
   }
 
-  // Calculate sum
   const sum = numbers.reduce((total, num) => total + num, 0);
 
   res.json({
     sum: sum,
+  });
+});
+
+//4
+app.post("/users", (req, res) => {
+  const { name, email } = req.body;
+
+  // Validation
+  if (!name || !email) {
+    return res.status(400).json({
+      error: "Name and email are required",
+    });
+  }
+
+  // Create new user
+  const newUser: TUser = { name, email };
+  users.push(newUser);
+
+  res.json({
+    message: "User successfully added",
   });
 });
 
