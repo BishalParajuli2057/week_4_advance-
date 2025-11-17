@@ -2,23 +2,30 @@
   "name": "bishal_parajuli_server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "homepage": "https://github.com/BishalParajuli2057/server_house#readme",
+  "bugs": {
+    "url": "https://github.com/BishalParajuli2057/server_house/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BishalParajuli2057/server_house.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc-watch --onSuccess \"nodemon dist/server.js\""
+    "start": "tsc-watch --onSuccess \"nodemon ./dist/server.js\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "morgan": "^1.10.1",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@types/express": "^5.0.5",
-    "@types/node": "^24.10.1",
     "nodemon": "^3.1.11",
-    "ts-node": "^10.9.2",
     "tsc-watch": "^7.2.0",
     "typescript": "^5.9.3"
   }
